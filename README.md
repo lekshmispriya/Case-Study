@@ -1,66 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# News Aggregator Backend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a Laravel 11 backend project for a News Aggregator website.  
+It fetches news articles from multiple sources (NewsAPI.org, The Guardian API, and BBC RSS feeds), stores them in a database, and provides API endpoints to search and filter articles for the frontend application.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Fetch articles from:
+  - NewsAPI.org (JSON API)
+  - The Guardian API (JSON API)
+  - BBC News RSS feeds (XML)
+- Store articles locally in MySQL database
+- Search and filter articles by:
+  - Keywords (title, description)
+  - Source
+  - Category
+  - Author
+  - Publication date range
+- Pagination support for API responses
+- Scheduled automatic fetching/updating of articles
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP 8.2  
+- Laravel 11.x  
+- MySQL or compatible database  
+- Composer  
+- API keys for NewsAPI and The Guardian (see below)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Setup Instructions
 
-## Laravel Sponsors
+1. **Clone the repository**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-git clone https://github.com/lekshmispriya/Case-Study.git
+cd case_study
+#Install dependencies
+composer install
+#Configure environment
 
-### Premium Partners
+#Copy .env.example to .env:
+    cp .env.example .env
+#Set your database credentials in .env
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+#Add API keys in .env:
 
-## Contributing
+NEWSAPI_KEY=your_newsapi_key_here
+GUARDIAN_API_KEY=your_guardian_api_key_here
+NYTIMES_KEY=your_nyt_api_key_here (if used)
+#Run migrations
+  -php artisan migrate
+#Start Server
+  php artisan serve
+#Run Queue
+ -php artisan queue:work
+#Run the scheduler 
+ -php artisan schedule:work
+#Incase if you want to test the job manually then run
+ -php artisan fetch:articles
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+######API Endpoints##########
+1.GET /api/news?page=1
+-Retrieve the latest news articles with pagination.
+2.GET /api/news/search
+    -Search and filter news articles.
 
-## Code of Conduct
+     -Query parameters:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+######Parameter	Description	Example#######
+1.q	        ->   Search keyword (title or description)	climate
+2.source	->   Filter by source name	NewsAPI
+3.category	->   Filter by category	technology
+4.author	->   Filter by author name	John
+5.date_from	->   Articles published on or after this date	2025-01-01
+6.date_to	->   Articles published on or before this date	2025-08-10
+7.page	    ->   Pagination page number	1
 
-## Security Vulnerabilities
+Example request:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+GET /api/news/search?q=climate&source=NewsAPI&category=technology&page=1
+_______________________________________
+######Services Overview######
+_________________________________________
+App\Services\NewsApiService – Fetches articles from NewsAPI.org
 
-## License
+App\Services\GuardianService – Fetches articles from The Guardian API
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+App\Services\BbcRssService – Fetches and parses articles from BBC RSS feeds
+
+Notes
+Ensure you have valid API keys from NewsAPI.org and The Guardian Developer Platform.
+
+BBC RSS feeds do not require API keys and are parsed from XML.
+
+Articles are deduplicated by their URL before saving.
+
+Pagination defaults to 20 articles per page.
+
+## Postman Collection
+
+You can import the Postman collection to test the API endpoints easily.
+ - Download the collection JSON file from the repo: case study  news apis.postman_collection
+ - Open Postman, click **Import** > **File** and select the downloaded JSON file.
+ - You can now run all API requests from Postman with pre-configured endpoints.

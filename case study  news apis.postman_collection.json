@@ -1,0 +1,286 @@
+{
+	"info": {
+		"_postman_id": "364c03d5-6b1d-417c-a3a7-7a0971ff4b22",
+		"name": "case study  news apis",
+		"description": "API endpoints for your News Aggregator backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16309126",
+		"_collection_link": "https://cloudy-meadow-504413.postman.co/workspace/case-study~f1f84b31-2e5f-4dec-9454-0127a372bc0d/collection/16309126-364c03d5-6b1d-417c-a3a7-7a0971ff4b22?action=share&source=collection_link&creator=16309126"
+	},
+	"item": [
+		{
+			"name": "Get Latest News",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/news?page=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"news"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search News",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/news/search?category=technology",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"news",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "climate",
+							"disabled": true
+						},
+						{
+							"key": "source",
+							"value": "NewsAPI",
+							"disabled": true
+						},
+						{
+							"key": "category",
+							"value": "technology"
+						},
+						{
+							"key": "author",
+							"value": "Katherine Li",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "date_from",
+							"value": "2025-08-08",
+							"disabled": true
+						},
+						{
+							"key": "date_to",
+							"value": "2025-08-08",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "newsapi-source test",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://newsapi.org/v2/top-headlines?language=en&pageSize=5&apiKey=fbd982ecf2534a5488200cd9f833cf01&category=business",
+					"protocol": "https",
+					"host": [
+						"newsapi",
+						"org"
+					],
+					"path": [
+						"v2",
+						"top-headlines"
+					],
+					"query": [
+						{
+							"key": "language",
+							"value": "en"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						},
+						{
+							"key": "apiKey",
+							"value": "fbd982ecf2534a5488200cd9f833cf01"
+						},
+						{
+							"key": "category",
+							"value": "business"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bbc-source-test",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://newsapi.org/v2/top-headlines?language=en&sources=bbc-news&apiKey=fbd982ecf2534a5488200cd9f833cf01",
+					"protocol": "https",
+					"host": [
+						"newsapi",
+						"org"
+					],
+					"path": [
+						"v2",
+						"top-headlines"
+					],
+					"query": [
+						{
+							"key": "language",
+							"value": "en"
+						},
+						{
+							"key": "sources",
+							"value": "bbc-news"
+						},
+						{
+							"key": "apiKey",
+							"value": "fbd982ecf2534a5488200cd9f833cf01"
+						},
+						{
+							"key": "category",
+							"value": "health",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "guardian-source-test",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://content.guardianapis.com/search?api-key=715a736c-3f47-4491-82c1-fdafbbceef90&page-size=5&show-fields=all\n",
+					"protocol": "https",
+					"host": [
+						"content",
+						"guardianapis",
+						"com"
+					],
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "api-key",
+							"value": "715a736c-3f47-4491-82c1-fdafbbceef90"
+						},
+						{
+							"key": "page-size",
+							"value": "5"
+						},
+						{
+							"key": "show-fields",
+							"value": "all\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "nytimes-source-test",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.nytimes.com/svc/topstories/v2/home.json?api-key=b8DSEWI6EFDQuF1eGTMWAeAR8AG4GZ9g\n",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nytimes",
+						"com"
+					],
+					"path": [
+						"svc",
+						"topstories",
+						"v2",
+						"home.json"
+					],
+					"query": [
+						{
+							"key": "api-key",
+							"value": "b8DSEWI6EFDQuF1eGTMWAeAR8AG4GZ9g\n"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
