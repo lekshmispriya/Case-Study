@@ -49,6 +49,9 @@ composer install
 
 #Add API keys in .env:
 
+#Generate key
+php artisan key:generate
+
 NEWSAPI_KEY=your_newsapi_key_here
 GUARDIAN_API_KEY=your_guardian_api_key_here
 NYTIMES_KEY=your_nyt_api_key_here (if used)
@@ -97,7 +100,7 @@ App\Services\NyApiService-Fetches articles from  Newyork Times API
 Notes
 Ensure you have valid API keys from NewsAPI.org,The Guardian Developer Platform and  Newyork Times Developer Platform.
 
-## Postman Collection
+## Postman Collection###
 
 You can import the Postman collection to test the API endpoints easily.
  - Download the collection JSON file from the repo: case study  news apis.postman_collection
