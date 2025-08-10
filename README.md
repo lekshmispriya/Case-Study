@@ -90,16 +90,12 @@ App\Services\NewsApiService – Fetches articles from NewsAPI.org
 
 App\Services\GuardianService – Fetches articles from The Guardian API
 
-App\Services\BbcRssService – Fetches and parses articles from BBC RSS feeds
+App\Services\BbcRssService – Fetches BBC articles from NewsAPI.org
+
+App\Services\NyApiService-Fetches articles from  Newyork Times API
 
 Notes
-Ensure you have valid API keys from NewsAPI.org and The Guardian Developer Platform.
-
-BBC RSS feeds do not require API keys and are parsed from XML.
-
-Articles are deduplicated by their URL before saving.
-
-Pagination defaults to 20 articles per page.
+Ensure you have valid API keys from NewsAPI.org,The Guardian Developer Platform and  Newyork Times Developer Platform.
 
 ## Postman Collection
 
